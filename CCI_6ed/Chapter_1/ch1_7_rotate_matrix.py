@@ -14,7 +14,7 @@ def rotate(matrix):
     return output
 
 def rotate_inplace(m):
-    # Rotate a matrix 90 degrees IN PLACE
+    # Rotate a matrix 90 degrees IN PLACE in O(N)
     n = len(m)
     z = n-1 # make calcs later simpler
     for i in range(ceil(n/2)-n%2):
@@ -25,7 +25,6 @@ def rotate_inplace(m):
     
 
 if __name__ == "__main__":
-    print('BOO RADLEY')
     m = [[]]
     print(rotate(m))
     print(rotate_inplace(m))
