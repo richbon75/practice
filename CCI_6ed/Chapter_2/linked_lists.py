@@ -11,7 +11,7 @@ class ListNode(object):
     def from_list(self, values = []):
         """Creates a linked list from a list of values.
         Returns (first_node, last_node)"""
-        if len(values) > 1:
+        if len(values) >= 1:
             first_node = __class__(values[0])
             return first_node, first_node.add_list(values[1:])
         return None, None

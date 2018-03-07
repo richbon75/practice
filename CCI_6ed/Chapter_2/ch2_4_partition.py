@@ -12,6 +12,12 @@ def partition_list(head, value):
     list so that all values < partition value are before it
     and all values > partition value come after it.
     Returns the head and tail of the list."""
+    # according to a closer read of the problem, nodes with
+    # the partition value need not be between the sections.
+    # They can be anywhere in the right-side.
+    # This function's answers are still valid answers to
+    # the problem, though.
+    
     newhead = None
     newmid = None
     newtail = None
