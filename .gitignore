@@ -2,6 +2,9 @@
 .DS_Store
 desktop.ini
 
+# local VSCode configs
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

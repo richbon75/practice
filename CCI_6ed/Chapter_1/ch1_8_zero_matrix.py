@@ -8,7 +8,10 @@ def zero_matrix(matrix):
     # store the rows and cols to be zeroed as sets (no dupes)
     zrows = set()
     zcols = set()
-    # find the locations of any zero elements
+    # find the locations of any zero elements.
+    # Explicitly checking equality to zero instead of "if not matrix[i][j]"
+    # because we want this to trigger only on zeros, not None
+    # or empty strings, or any other Boolean False value.
     for i in range(height):
         for j in range(width):
             if matrix[i][j]==0:
@@ -22,6 +25,10 @@ def zero_matrix(matrix):
             matrix[i][j] = 0
     return matrix
 
+# Hint in the book suggested O(1) space requirement by using
+# the first row and first column to record where zeros will go.
+# Will implement that later.
+
 if __name__ == "__main__":
     from pprint import pprint
     m = [[]]
@@ -29,7 +36,7 @@ if __name__ == "__main__":
     m = [['A','B','C'],['D',0,'E'],['F','G','H']]
     pprint(zero_matrix(m))
     m = [['A','B','C','D','E','F'],
-         ['G','H','I','J',None,'L'],
+         ['G','H','I','J','K','L'],
          ['M','N','O','P','Q','R'],
          ['S','T','U','V','W','X'],
          ['Y','Z','A','B','C','D']]

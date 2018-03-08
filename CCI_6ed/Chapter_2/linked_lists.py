@@ -7,13 +7,29 @@ class ListNode(object):
         self.value = value
         self.next_node = None
 
+    def __len__(self):
+        """Iterate through the nodes and return the count of
+        nodes in the list."""
+        length = 1
+        current_node = self
+        while current_node.next_node is not None:
+            length += 1
+            current_node = current_node.next_node
+            if length > 10000:
+                # safety valve in case of loop in the list
+                return 10000
+        return length
+
     @classmethod
-    def from_list(self, values = []):
+    def from_list(self, values = None):
         """Creates a linked list from a list of values.
-        Returns (first_node, last_node)"""
+        Returns (head, tail)"""
         if len(values) >= 1:
-            first_node = __class__(values[0])
-            return first_node, first_node.add_list(values[1:])
+            head = __class__(values[0])
+            tail = head
+            for value in values[1:]:
+                tail = tail.add(value)
+            return head, tail
         return None, None
 
     def add(self, value = None):
@@ -22,7 +38,7 @@ class ListNode(object):
         self.next_node = __class__(value)
         return self.next_node
 
-    def add_list(self, values = []):
+    def add_list(self, values = None):
         """Given a list, iterate through them and add them to the list.
         Returns the last added node."""
         current_node = self
@@ -47,10 +63,6 @@ class ListNode(object):
             yield current_node.value
             current_node = current_node.next_node
 
-    def print_chain(self):
-        """Print values of all nodes from the current node"""
-        print([value for value in self.value_chain()])
-
     def node_chain(self):
         """Generator that iterates through all nodes
         from the current node down the list."""
@@ -58,6 +70,10 @@ class ListNode(object):
         while current_node:
             yield current_node
             current_node = current_node.next_node
+
+    def print_chain(self):
+        """Print values of all nodes from the current node"""
+        print([node.value for node in self.node_chain()])
 
     def find(self, value, stop_node=None):
         """Iterate through the nodes and return the first node
@@ -99,7 +115,13 @@ class ListNode(object):
             current_node = current_node.next_node
         return head
 
-            
+if __name__ == "__main__":
+    start, last = ListNode.from_list(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
+    import time
+    print('Here we go')
+    start_time = time.time()
+    start.print_chain()
+    print('Time to print using print_chain: {}'.format(time.time()-start_time))
 
         
 
