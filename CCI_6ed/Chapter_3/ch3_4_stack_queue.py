@@ -15,7 +15,7 @@ class StackQueue(object):
     def push(self, value):
         self.in_stack.append(value)
 
-    def pop(self):
+    def dequeue(self):
         if not self.out_stack:
             self.dump_in_to_out()
         return self.out_stack.pop()
