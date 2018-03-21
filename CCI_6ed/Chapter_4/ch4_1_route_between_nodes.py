@@ -90,11 +90,12 @@ def test(nodes=50):
     node 'A' to 'Z'"""
     g = Graph()
     for _ in range(nodes):
-        g.add(randchar('A','z'), randchar('A','z'))
+        g.add(randchar('A','Z'), randchar('A','Z'))
     g.print()
-    print("Path from A->Z: {}".format(g.find_path('A','z')))
+    print("Path from A->Z: {}".format(g.find_path('A','A')))
 
 if __name__ == "__main__":
+    # TODO:  FIX CHECKS FOR PATH FROM A->A
     test(30)
           
 

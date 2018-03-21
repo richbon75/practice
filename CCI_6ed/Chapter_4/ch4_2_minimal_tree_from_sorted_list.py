@@ -2,6 +2,10 @@
 
 from math import floor, ceil, log2
 
+# NOTE: This runs in O(NlogN) time - we could do this in O(N) if we
+# built subtrees instead of doing a full tree search for every
+# insertion.
+
 class BSTreeNode(object):
     """Basic binary search tree object"""
 
