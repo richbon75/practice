@@ -11,6 +11,12 @@ Output: N = 10001001100
 """
 
 # Looks like we're just overwriting the bits in positions j to i.
+# Note: Because of the way integers work in Python (no fixed byte length)
+# you can't make a one step "AND" mask of zeros where you want to clear
+# values and 1s everywhere else, because the "everywhere else" space is
+# effectively infinite. So I'll do it in a two-step process with a mask
+# that has 1s where I want to clear values and 0s "everywhere else" (since
+# that's the default)
 
 def binary_overlay(N, M, i, j):
     # make a mask
