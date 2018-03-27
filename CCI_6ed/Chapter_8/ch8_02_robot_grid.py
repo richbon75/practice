@@ -98,6 +98,9 @@ class Robot(object):
             path.pop()
         return None
 
+# TODO:  Rewrite pathfinder to go from back to front - performance
+# of this pathfinder is not great.
+
 if __name__ == "__main__":
     # Create the grid
     g = Grid(15, 30)
