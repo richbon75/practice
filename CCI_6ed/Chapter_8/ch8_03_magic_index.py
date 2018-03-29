@@ -63,7 +63,7 @@ if __name__ == "__main__":
         A[i] = i+1
     print(find_magic_index_simple(A))
     print(find_magic_index_fancy(A))
-    print(find_magic_index_dupes(A))
+    print(find_magic_index_dupes(A))  # Has O(n)ish performance on lists with few dupes.
 
     # What if elements are not distinct?
     print ('List with dupes')

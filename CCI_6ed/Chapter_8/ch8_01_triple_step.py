@@ -2,6 +2,8 @@
 2 steps, or 3 steps at a time.  Implement a method to count how many possible
 ways the child can run up the stairs."""
 
+# This file contains three different approaches. The last one is the fastest.
+
 import time
 
 def ways_up_count(n):

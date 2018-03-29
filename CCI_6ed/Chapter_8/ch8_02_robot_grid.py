@@ -99,7 +99,7 @@ class Robot(object):
         return None
 
 # TODO:  Rewrite pathfinder to go from back to front - performance
-# of this pathfinder is not great.
+# of this pathfinder is not great for certain blockage locations.
 
 if __name__ == "__main__":
     # Create the grid
