@@ -86,6 +86,9 @@ class Robot(object):
 
     def find_path(self, path = None):
         """Have the robot find a path to the exit."""
+        # This version does a depth-first search. Simple and works ok
+        # in most cases, but there are some grid layouts that could result
+        # in horrible performance.
         if path is None:
             path = deque([(0,0)])
         for move in self.valid_moves(path[-1]):
@@ -97,6 +100,43 @@ class Robot(object):
                 return result
             path.pop()
         return None
+
+    def find_path_better(self, from_loc = None, to_loc = None, seen = None, prior_level = None, path = None, depth=0):
+        if path is None:
+            path = deque()  # so we can append to the front easily
+        if from_loc is None:
+            from_loc = (self.r, self.c)
+        if to_loc is None:
+            to_loc = self.grid.exit
+        if seen is None:
+            seen = {from_loc}
+        if prior_level is None:
+            prior_level = [from_loc]
+        this_level = list()       # record the new cells we could reach
+        this_level_from = list()  # record which cell brought us to each
+        end_found = False
+        # print(f"{depth} -- {prior_level}")
+        for loc in prior_level:
+            if end_found:
+                break
+            for m in self.valid_moves(loc):
+                if m in seen:
+                    continue
+                seen.add(m)
+                this_level.append(m)
+                this_level_from.append(loc)
+                if m == to_loc:
+                    end_found = True
+                    path.appendleft(m)
+                    break
+        # now process the next lower level
+        if not end_found:
+            self.find_path_better(from_loc, to_loc, seen, prior_level = this_level, path = path, depth=depth+1)
+        # now start backing out. If path is not empty, a path to the end exists.
+        # Record the place prior to the most recent element in our path.
+        if path:
+            path.appendleft(this_level_from[this_level.index(path[0])])
+        return path
 
 # TODO:  Rewrite pathfinder to go from back to front - performance
 # of this pathfinder is not great for certain blockage locations.
@@ -118,3 +158,7 @@ if __name__ == "__main__":
         g.overlay(path_out)
     else:
         print('No path found.')
+    better_path_out = rob.find_path_better()
+    print(better_path_out)
+    if better_path_out:
+        g.overlay(better_path_out)
