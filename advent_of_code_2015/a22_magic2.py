@@ -117,6 +117,10 @@ def find_minimum_mana(gamestate):
     if gamestate.total_mana_spent >= min_mana:
         return
     # top of player turn
+    gamestate.player_hp -= 1  # hard mode addition
+    if gamestate.player_hp <= 0:
+        # player has died, don't continue
+        return
     gamestate.turncycle()
     if gamestate.boss_hp <= 0:
         if gamestate.total_mana_spent < min_mana:
